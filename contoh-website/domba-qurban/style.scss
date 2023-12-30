@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
+
+$timing-one: cubic-bezier(0.86, 0, 0.07, 1);
+
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font: normal 1.5vw/1.5 'Noto Serif', Georgia, Times, serif;
+	margin: 0;
+	color: white;
+}
+
+@media screen and (max-width: 1000px) {
+	body {
+		font-size: 15px;
+	}
+}
+
+@media screen and (min-width: 1900px) {
+	body {
+		font-size: 28.8px;
+	}
+}
+
+main {
+	display: block;
+	height: 100%;
+}
+
+nav {
+	position: absolute;
+	right: 2em;
+	z-index: 5;
+	text-align: right;
+
+	#prev,
+	#next {
+		display: inline-block;
+		background-color: rgba(255, 255, 255, 0.25);
+		border: none;
+		color: white;
+		border-radius: 1.125em;
+		width: 2em;
+		font-size: 1.125em;
+		line-height: 2em;
+		padding: 0;
+		text-align: center;
+		font-family: BlinkMacSystemFont, -apple-system, 'Helvetica Neue', 'Roboto', sans-serif;
+		margin: 0.25em 0;
+		outline: none;
+		cursor: pointer;
+		transition: background-color 0.15s $timing-one;
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	#pagenumber {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		overflow: hidden;
+		#pagecurrent {
+			font-size: 1.5em;
+			display: inline-block;
+			overflow: hidden;
+			vertical-align: sub;
+			line-height: 1;
+
+			animation-duration: 0.5s;
+			animation-timing-function: $timing-one;
+			animation-fill-mode: forwards;
+		}
+	}
+}
+
+article {
+	background-color: MidnightBlue;
+	position: absolute;
+	z-index: 1;
+	transition: background-color 0.75s $timing-one;
+	width: 100%;
+}
+
+.photo {
+	background-color: rgba(0, 0, 0, 0.25);
+	position: relative;
+	overflow: hidden;
+	transition: transform 0.75s $timing-one;
+	transform: translateX(-100%);
+
+	.img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+		transform: translateX(50%);
+		transition: transform 0.75s $timing-one;
+	}
+}
+
+.text {
+	transition: opacity 0.75s $timing-one;
+	opacity: 0;
+	
+	h1 {
+		font: normal 2.5em/1.5 'Crimson Text', Georgia, Times, serif;
+		margin: 0; 
+	}
+}
+
+@media screen and (orientation: landscape) {
+	nav {
+		top: calc(50% - 2.75em);
+		width: 3.5em;
+		bottom: 2em;
+	}
+
+	article {
+		height: 100%;
+	}
+
+	.photo,
+	.text {
+		width: 50vw;
+		height: 100%;
+		position: absolute;
+	}
+
+	.photo {
+		transform: translateX(-100%);
+		.img {
+			transform: translateX(50%);
+		}
+	}
+
+	.text {
+		top: 0;
+		left: calc(50vw + 3em);
+		width: calc(50% - 10em);
+		h1 {
+			font: normal 2.5em/1.5 'Crimson Text', Georgia, Times, serif;
+			margin: 0; 
+			transform: translateY(calc(-50vh + 100%/2));
+			position: absolute;
+			bottom: 5em;
+		}
+
+		p {
+			text-align: justify;
+			font-size: small;
+			position: absolute;
+			bottom: 10em;
+			margin: 0;
+			max-height: 25em;
+			overflow: hidden;
+		}
+	}
+
+	.active {
+		.photo {
+			transform: translateX(0);
+			.img {
+				transform: translateX(0);
+			}
+		}
+	}
+
+	.slideOut {
+		.photo {
+			transform: translateX(-100%);
+			.img {
+				transform: translateX(50%);
+			}
+		}
+	}
+}
+
+@media screen and (orientation: portrait) {
+	nav {
+		position: absolute;
+		top: calc(85vw + 3em);
+		#pagenumber {
+			display: none;
+		}
+	}
+
+	article {
+		min-height: 100%;
+	}
+
+	.photo {
+		height: 85vw;
+		transform: translateY(-100%);
+		.img {
+			transform: translateY(50%);
+		}
+	}
+
+	.text {
+		padding: 2.5em 2em;
+		p {
+			margin: 1em 0;
+			max-width: 32em;
+		}
+	}
+
+	.active {
+		.photo {
+			transform: translateY(0);
+			.img {
+				transform: translateY(0);
+			}
+		}
+	}
+
+	.slideOut {
+		.photo {
+			transform: translateY(-100%);
+			.img {
+				transform: translateY(50%);
+			}
+		}
+	}
+}
+
+.active {
+	z-index: 3;
+	.text {
+		opacity: 1;
+	}
+}
+
+.slideOut {
+	animation: backgroundOut 0.4s ease-in 0.6s forwards;
+	.text {
+		opacity: 0;
+	}
+}
+
+@keyframes pageIn {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes pageOut {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+}
+
+@keyframes backgroundOut {
+	from {
+		background-color: auto;
+	}
+	to{
+		background-color: transparent;
+	}
+}
+
+.tokyo {
+	background-color: #635a8c;
+	.img {
+		background-image: url('image/mekah.jpg');
+	}
+}
+
+.osaka {
+	background-color: #202c51;
+	.img {
+		background-image: url('image/madinah.jpg');
+	}
+}
+
+.kyoto {
+	background-color: #7b6a67;
+	.img {
+		background-image: url('image/nabawi.jpg');
+	}
+}
+
+.yokohama {
+	background-color: #7f6c92;
+	.img {
+		background-image: url('image/abraj al bait towers.jpg');
+	}
+}
+
+.nagoya {
+	background-color: #304557;
+	.img {
+		background-image: url('image/halaman masjid madinah.jpg');
+	}
+}
+
+.kobe {
+	background-color: #2b2466;
+	.img {
+		background-image: url('image/Jumrah-di-Mina5.jpg');
+	}
+}

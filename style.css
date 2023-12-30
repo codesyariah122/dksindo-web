@@ -1,0 +1,83 @@
+/* Tambahkan ini ke dalam file styles.css Anda */
+
+/* Gaya untuk layanan */
+.service-card {
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Gaya untuk formulir */
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #4a5568;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+}
+
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #1a202c;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #2d3748;
+}
+
+/* Gaya untuk footer */
+footer {
+    background-color: #2d3748;
+    color: #ffffff;
+}
+
+/* Responsif untuk ukuran layar kecil */
+@media screen and (max-width: 640px) {
+    .hero {
+        padding: 6rem 2rem;
+    }
+
+    .service-card {
+        margin-bottom: 1.5rem;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+}
+
+#whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #whatsapp-button img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
